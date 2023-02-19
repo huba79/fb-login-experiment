@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Dental</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem.
+    </string>
+    <string name="com_auth0_domain">AUTH)_DOMAIN_PLACEHOLDER</string>
+    <string name="facebook_app_id">719084903209331</string>
+    <string name="facebook_client_token">057de4f16c39e71e861bb9571b1b034b</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+</resources>
