@@ -1,6 +1,8 @@
-package com.example.dental
+package com.example.dental.UI
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +10,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.dental.R
 import com.example.dental.databinding.FragmentFirstBinding
-import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
-
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -32,12 +34,26 @@ class FirstFragment : Fragment() {
     ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        try {
+            val packageName = requireContext().packageName
+            val info = requireContext().packageManager.getPackageInfo(
+                packageName,
+                PackageManager.GET_SIGNATURES)
+            for (signature in info.signatures) {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            Log.e("KeyHash:", "Package Not found!")
+        } catch (e: NoSuchAlgorithmException) {
+            Log.e("KeyHash:", "Hash algorythm not found!")
+        }
 
+        val EMAIL = "email"
 
-        var EMAIL = "tanczos.huba@gmail.com"
-
-        var loginButton = _binding!!.loginButton
-        loginButton.setPermissions(EMAIL)
+        val loginButton = _binding!!.loginButton
+        loginButton.permissions= listOf(EMAIL)
         // If you are using in a fragment, call
         loginButton.setFragment(this)
 
@@ -47,8 +63,10 @@ class FirstFragment : Fragment() {
         // Callback registration
         loginButton.registerCallback(listener.callbackManager(), object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
-                Log.d("TAG", "Success Login")
-                // Get User's Info
+                Log.d("FBLoginResult", "Success Login")
+
+                Log.i("FBLoginResult", "authenticationToken: ${result.authenticationToken?.token.toString()}")
+                Log.i("FBLoginResult", "accessToken: ${result.accessToken.token.toString()}")
             }
 
             override fun onCancel() {
@@ -66,7 +84,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(com.example.dental.R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 

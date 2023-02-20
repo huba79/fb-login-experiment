@@ -1,22 +1,23 @@
 @file:Suppress("OVERRIDE_DEPRECATION")
 
-package com.example.dental
+package com.example.dental.UI
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.example.dental.R
 import com.example.dental.databinding.ActivityMainBinding
 import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), FirstFragmentListener {
 
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener {
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
