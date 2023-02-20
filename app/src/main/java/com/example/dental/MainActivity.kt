@@ -1,3 +1,5 @@
+@file:Suppress("OVERRIDE_DEPRECATION")
+
 package com.example.dental
 
 import android.content.Intent
@@ -16,12 +18,9 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 
-//import com.facebook.FacebookSdk;
-//import com.facebook.appevents.AppEventsLogger;
-
 class MainActivity : AppCompatActivity(), FirstFragmentListener {
 
-    var callbackManager: CallbackManager = CallbackManager.Factory.create()
+    private var callbackManager: CallbackManager = CallbackManager.Factory.create()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -40,8 +39,8 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 //        FacebookSdk.fullyInitialize()
-       FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(application);
+       FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(application)
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -75,7 +74,7 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
-    public override fun callbackManager():CallbackManager{
+    override fun callbackManager():CallbackManager{
         return callbackManager
     }
 }
