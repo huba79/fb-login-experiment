@@ -1,7 +1,7 @@
-package com.example.dental
+package com.example.dental.ui
 
 import com.facebook.CallbackManager
 
-interface FirstFragmentListener {
+interface LoginFragmentListener {
     fun callbackManager():CallbackManager
 }

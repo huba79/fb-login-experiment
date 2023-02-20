@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LoginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/fbLoginButtonId"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="25dp" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleLoginButtonId"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="25dp" />
+
+        <TextView
+            android:id="@+id/textview_first"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:layout_marginVertical="25dp"
+            android:text="@string/lorem_ipsum" />
+
+        <Button
+            android:id="@+id/button_first"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="25dp"
+            android:layout_marginVertical="25dp"
+            android:text="@string/next" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

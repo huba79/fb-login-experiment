@@ -16,7 +16,7 @@
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Dental">
             <intent-filter>
@@ -28,8 +28,7 @@
         <!-- for FB auth start-->
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">

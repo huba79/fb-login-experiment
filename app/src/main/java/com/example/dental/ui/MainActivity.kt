@@ -1,24 +1,23 @@
 @file:Suppress("OVERRIDE_DEPRECATION")
 
-package com.example.dental
+package com.example.dental.ui
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.example.dental.R
 import com.example.dental.databinding.ActivityMainBinding
 import com.facebook.CallbackManager
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity(), FirstFragmentListener {
+class MainActivity : AppCompatActivity(), LoginFragmentListener {
 
     private var callbackManager: CallbackManager = CallbackManager.Factory.create()
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -33,20 +32,16 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener {
 
         setSupportActionBar(binding.toolbar)
 
-//        callbackManager = CallbackManager.Factory.create()
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-//        FacebookSdk.fullyInitialize()
-       FacebookSdk.sdkInitialize(applicationContext)
-        AppEventsLogger.activateApp(application)
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -70,9 +65,13 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
+        //if login done,
+        if (resultCode == 0) {
+            findNavController(binding.root.id).navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
     }
     override fun callbackManager():CallbackManager{
         return callbackManager
